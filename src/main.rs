@@ -38,7 +38,7 @@ fn main() {
                 break;
             },
             "status" => {
-                // cmd_status(server_info, client_info);
+                cmd_status(&server_info, &client_info);
             }
             _ => {
                 println!("Invalid command.");

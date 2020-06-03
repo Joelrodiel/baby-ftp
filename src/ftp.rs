@@ -46,7 +46,7 @@ pub fn connect(mut _info: &mut ConnectionInfo, mut _client: &mut ClientInfo) -> 
         _info.is_closing = true;
     }
 
-    _client.username = name;
+    _client.username = name.replace("\n", "");
     _info.data_conc = _stream;
     return true
 }
