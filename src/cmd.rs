@@ -14,5 +14,3 @@ pub fn cmd_connect(args: Vec<String>, mut _info: &mut ConnectionInfo, mut _clien
 
     connect(&mut _info, &mut _client);
 }
-
-// pub fn disconnect(mut _info: &mut ConnectionInfo, mut _stream: )

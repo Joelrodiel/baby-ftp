@@ -1,5 +1,6 @@
 use std::env;
 use std::io::{self, Write};
+use std::net::{Shutdown};
 
 mod cmd;
 mod ftp;
@@ -33,10 +34,21 @@ fn main() {
                     println!("Usage: connect host-name [port]");
                 }
             },
+            "disconnect" | "exit" => {
+                break;
+            },
+            "status" => {
+                // cmd_status(server_info, client_info);
+            }
             _ => {
-
+                println!("Invalid command.");
             }
         }
+    }
+
+    if server_info.is_connected {
+        server_info.data_conc.shutdown(Shutdown::Both).unwrap();
+        println!("221 Goodbye");
     }
 }
 

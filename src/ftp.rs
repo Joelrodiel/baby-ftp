@@ -47,6 +47,7 @@ pub fn connect(mut _info: &mut ConnectionInfo, mut _client: &mut ClientInfo) -> 
     }
 
     _client.username = name;
+    _info.data_conc = _stream;
     return true
 }
 
