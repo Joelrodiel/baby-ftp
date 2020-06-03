@@ -1,0 +1,11 @@
+[package]
+name = "ftp_client"
+version = "0.1.0"
+authors = ["Joelrodiel <joel.rodiel.lucero@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+regex = "1"
+net2 = "0.2.33"
