@@ -4,6 +4,8 @@ use std::io::{self, Write};
 mod cmd;
 mod ftp;
 
+use cmd::*;
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -38,17 +40,3 @@ fn main() {
     }
 }
 
-fn cmd_connect(args: Vec<String>, mut _info: &mut ftp::ConnectionInfo, mut _client: &mut ftp::ClientInfo) {
-    _client.server_name = String::from(args.get(1).unwrap());
-
-    if !_client.server_name.contains(":") {
-        if args.len() == 2 {
-            _client.server_name.push_str(":21");
-        } else {
-            _client.server_name.push_str(":");
-            _client.server_name.push_str(args.get(2).unwrap());
-        }
-    }
-
-    cmd::connect(&mut _info, &mut _client);
-}
