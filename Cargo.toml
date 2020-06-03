@@ -1,5 +1,5 @@
 [package]
-name = "ftp_client"
+name = "baby_ftp"
 version = "0.1.0"
 authors = ["Joelrodiel <joel.rodiel.lucero@gmail.com>"]
 edition = "2018"
