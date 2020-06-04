@@ -56,3 +56,8 @@ pub fn cmd_set_type(mut _info: &mut ConnectionInfo, typ: FTPTypes) {
     send_reply(&mut _info.data_conc, "TYPE", type_code);
     print_reply(&_info.data_conc);
 }
+
+pub fn cmd_get_system(mut _info: &mut ConnectionInfo) {
+    send_reply(&mut _info.data_conc, "SYST", "");
+    print_reply(&_info.data_conc);
+}

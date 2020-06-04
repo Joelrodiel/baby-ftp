@@ -47,6 +47,9 @@ fn main() {
             "binary" => {
                 cmd_set_type(&mut server_info, ftp::FTPTypes::BINARY);
             }
+            "system" => {
+                cmd_get_system(&mut server_info);
+            }
             _ => {
                 println!("{}Invalid command.{}", color::Fg(color::Red), color::Fg(color::Reset));
             }
