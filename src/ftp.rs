@@ -3,7 +3,6 @@ use std::io::{self, Write, BufReader, BufRead};
 use std::time::Duration;
 use regex::Regex;
 use net2::TcpBuilder;
-use termion::color;
 
 pub fn connect(mut _info: &mut ConnectionInfo, mut _client: &mut ClientInfo) -> bool {
     let _status = conn_tcp_stream(&mut _client);
@@ -16,7 +15,9 @@ pub fn connect(mut _info: &mut ConnectionInfo, mut _client: &mut ClientInfo) -> 
             _info.is_closing = false;
         },
         Err(e) => {
-            println!("{}Error: {}{}", color::Fg(color::Red), e, color::Fg(color::Reset));
+            println!("{}Error: {}{}",
+                termion::color::Fg(termion::color::Red), e,
+                termion::color::Fg(termion::color::Reset));
             return false
         }
     }
@@ -90,7 +91,7 @@ pub fn print_reply(_stream: &TcpStream) -> String {
 
     set_reply_color(&code.as_str());
 
-    print!("{}{}", _recieved, color::Fg(color::Reset));
+    print!("{}{}", _recieved, termion::color::Fg(termion::color::Reset));
 
     code
 }
@@ -158,16 +159,16 @@ impl Default for ClientInfo {
 fn set_reply_color(code: &str) {
     match code.to_string().parse::<u16>().unwrap() {
         200..=257 | 120 | 421 => {
-            print!("{}", color::Fg(color::Green));
+            print!("{}", termion::color::Fg(termion::color::Green));
         }
         331..=350 => {
-            print!("{}", color::Fg(color::Yellow));
+            print!("{}", termion::color::Fg(termion::color::Yellow));
         }
         425..=452 => {
-            print!("{}", color::Fg(color::Magenta));
+            print!("{}", termion::color::Fg(termion::color::Magenta));
         }
         500..=530 | 10054..=10068 => {
-            print!("{}", color::Fg(color::Red));
+            print!("{}", termion::color::Fg(termion::color::Red));
         }
         _ => {}
     }
