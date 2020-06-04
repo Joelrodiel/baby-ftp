@@ -3,6 +3,7 @@ use std::io::{self, Write, BufReader, BufRead};
 use std::time::Duration;
 use regex::Regex;
 use net2::TcpBuilder;
+use termion::color;
 
 pub fn connect(mut _info: &mut ConnectionInfo, mut _client: &mut ClientInfo) -> bool {
     let _status = conn_tcp_stream(&mut _client);
@@ -15,7 +16,7 @@ pub fn connect(mut _info: &mut ConnectionInfo, mut _client: &mut ClientInfo) -> 
             _info.is_closing = false;
         },
         Err(e) => {
-            println!("Error: {}", e);
+            println!("{}Error: {}{}", color::Fg(color::Red), e, color::Fg(color::Reset));
             return false
         }
     }
@@ -87,7 +88,10 @@ pub fn print_reply(_stream: &TcpStream) -> String {
         }
     }
 
-    print!("{}", _recieved);
+    set_reply_color(&code.as_str());
+
+    print!("{}{}", _recieved, color::Fg(color::Reset));
+
     code
 }
 
@@ -148,5 +152,23 @@ impl Default for ClientInfo {
             connect_mode: FTPModes::Passive,
             username: "root".to_string(),
         }
+    }
+}
+
+fn set_reply_color(code: &str) {
+    match code.to_string().parse::<u16>().unwrap() {
+        200..=257 | 120 | 421 => {
+            print!("{}", color::Fg(color::Green));
+        }
+        331..=350 => {
+            print!("{}", color::Fg(color::Yellow));
+        }
+        425..=452 => {
+            print!("{}", color::Fg(color::Magenta));
+        }
+        500..=530 | 10054..=10068 => {
+            print!("{}", color::Fg(color::Red));
+        }
+        _ => {}
     }
 }

@@ -1,6 +1,7 @@
 use std::env;
 use std::io::{self, Write};
 use std::net::{Shutdown};
+use termion::color;
 
 mod cmd;
 mod ftp;
@@ -41,14 +42,14 @@ fn main() {
                 cmd_status(&server_info, &client_info);
             }
             _ => {
-                println!("Invalid command.");
+                println!("{}Invalid command.{}", color::Fg(color::Red), color::Fg(color::Reset));
             }
         }
     }
 
     if server_info.is_connected {
         server_info.data_conc.shutdown(Shutdown::Both).unwrap();
-        println!("221 Goodbye");
+        println!("{}221 Goodbye{}", color::Fg(color::Green), color::Fg(color::Reset));
     }
 }
 

@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 regex = "1"
 net2 = "0.2.33"
+termion = "1.1.1"
