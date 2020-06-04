@@ -20,13 +20,22 @@ pub fn cmd_status(_info: &ConnectionInfo, _client: &ClientInfo) {
         print!("Connected to {}\nUser: {}\nMode: ", _client.server_name, _client.username);
         match &_info.connect_mode {
             FTPModes::Active => {
-                println!("Active");
+                print!("Active");
             }
             FTPModes::Passive => {
-                println!("Passive");
+                print!("Passive");
             }
             FTPModes::Both => {
-                println!("Both");
+                print!("Both");
+            }
+        }
+        print!("\nData type: ");
+        match &_info.data_type {
+            FTPTypes::ASCII => {
+                println!("ASCII");
+            }
+            FTPTypes::BINARY => {
+                println!("BINARY");
             }
         }
     } else {
