@@ -33,3 +33,17 @@ pub fn cmd_status(_info: &ConnectionInfo, _client: &ClientInfo) {
         println!("Not connected.");
     }
 }
+
+pub fn cmd_set_type(mut _info: &mut ConnectionInfo, typ: FTPTypes) {
+    let type_code = match &typ {
+        FTPTypes::ASCII => {
+            "A"
+        }
+        FTPTypes::BINARY => {
+            "I"
+        }
+    };
+    _info.data_type = typ;
+    send_reply(&mut _info.data_conc, "TYPE", type_code);
+    print_reply(&_info.data_conc);
+}

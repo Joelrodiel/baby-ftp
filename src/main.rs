@@ -35,11 +35,17 @@ fn main() {
                     println!("Usage: connect host-name [port]");
                 }
             },
-            "disconnect" | "exit" => {
+            "bye" | "exit" => {
                 break;
             },
             "status" => {
                 cmd_status(&server_info, &client_info);
+            }
+            "ascii" => {
+                cmd_set_type(&mut server_info, ftp::FTPTypes::ASCII);
+            }
+            "binary" => {
+                cmd_set_type(&mut server_info, ftp::FTPTypes::BINARY);
             }
             _ => {
                 println!("{}Invalid command.{}", color::Fg(color::Red), color::Fg(color::Reset));
